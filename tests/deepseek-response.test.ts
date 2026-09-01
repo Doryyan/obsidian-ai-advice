@@ -10,6 +10,9 @@ describe('extractResponseContent', () => {
 
   it('rejects malformed responses', () => {
     expect(extractResponseContent({ choices: [] })).toBeNull();
+    expect(extractResponseContent({ choices: [null] })).toBeNull();
+    expect(extractResponseContent({ choices: [{ message: null }] })).toBeNull();
+    expect(extractResponseContent({ choices: [{ message: { content: 42 } }] })).toBeNull();
     expect(extractResponseContent(null)).toBeNull();
   });
 });

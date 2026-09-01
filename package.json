@@ -1,6 +1,6 @@
 {
   "name": "obsidian-ai-advice",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A bilingual DeepSeek-powered AI advice plugin for Obsidian.",
   "main": "main.js",
   "type": "module",
@@ -17,6 +17,7 @@
   "scripts": {
     "dev": "node esbuild.config.mjs",
     "build": "tsc --noEmit --skipLibCheck && node esbuild.config.mjs production",
+    "lint": "eslint .",
     "test": "vitest run"
   },
   "keywords": [
@@ -26,10 +27,16 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@types/node": "^22.15.17",
     "esbuild": "0.25.5",
+    "eslint": "^9.39.4",
+    "eslint-plugin-obsidianmd": "^0.4.2",
+    "globals": "^17.11.0",
+    "jiti": "^2.7.0",
     "obsidian": "1.13.1",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.69.0",
     "vitest": "^4.1.11"
   }
 }

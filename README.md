@@ -25,7 +25,13 @@ AI Advice 是一个中英文 Obsidian 插件。它可以把你明确选择的文
 
 插件不收集遥测、不保存聊天记录，也不经过开发者服务器。只有点击“获取建议”后，本次选择的内容才会直接发送到 `https://api.deepseek.com`。使用本插件需要 DeepSeek 开放平台账号、API Key、网络连接和可用余额；插件本身免费，API 费用由 DeepSeek 收取。DeepSeek 会依据其[开放平台服务协议](https://cdn.deepseek.com/policies/zh-CN/deepseek-open-platform-terms-of-service.html)和[隐私政策](https://cdn.deepseek.com/policies/zh-CN/deepseek-privacy-policy.html)处理请求。发送前请检查所选内容，避免在不适当的情况下提交机密或高度敏感的笔记。
 
-## Manual installation / 手动安装
+## Installation / 安装
+
+Open the [AI Advice community listing](https://community.obsidian.md/plugins/ai-advice) and select **Add to Obsidian**, or search for **AI Advice** under **Settings → Community plugins → Browse**.
+
+打开 [AI Advice 社区页面](https://community.obsidian.md/plugins/ai-advice)，点击 **Add to Obsidian**；也可以在 **设置 → 第三方插件 → 浏览** 中搜索 **AI Advice**。
+
+### Manual installation / 手动安装
 
 1. Build the plugin with `npm install && npm run build`.
 2. Create `<your-vault>/.obsidian/plugins/ai-advice/`.
@@ -39,6 +45,7 @@ AI Advice 是一个中英文 Obsidian 插件。它可以把你明确选择的文
 
 ```bash
 npm install
+npm run lint
 npm test
 npm run build
 ```

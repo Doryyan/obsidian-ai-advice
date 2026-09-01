@@ -57,11 +57,15 @@ export class AdviceModal extends Modal {
 
   private renderForm(): void {
     const sourceSection = this.contentEl.createDiv({ cls: 'ai-advice-section' });
-    sourceSection.createEl('div', { text: this.t('sourceLabel'), cls: 'ai-advice-label' });
-    const scopeGroup = sourceSection.createDiv({ cls: 'ai-advice-scope-group' });
+    sourceSection.createDiv({ text: this.t('sourceLabel'), cls: 'ai-advice-label' });
     const scopes: AdviceScope[] = this.snapshot.selection.trim()
       ? ['selection', 'note', 'input']
       : ['note', 'input'];
+    const scopeGroup = sourceSection.createDiv({
+      cls: scopes.length === 2
+        ? 'ai-advice-scope-group has-two-options'
+        : 'ai-advice-scope-group',
+    });
     const scopeButtons = new Map<AdviceScope, HTMLButtonElement>();
 
     for (const scope of scopes) {
@@ -119,7 +123,7 @@ export class AdviceModal extends Modal {
     this.submitButton.addEventListener('click', () => void this.submit());
 
     this.resultSection = this.contentEl.createDiv({ cls: 'ai-advice-result-section is-hidden' });
-    this.resultSection.createEl('div', { text: this.t('resultTitle'), cls: 'ai-advice-result-title' });
+    this.resultSection.createDiv({ text: this.t('resultTitle'), cls: 'ai-advice-result-title' });
     this.resultContent = this.resultSection.createDiv({ cls: 'ai-advice-result-content markdown-rendered' });
 
     this.questionEl.focus();

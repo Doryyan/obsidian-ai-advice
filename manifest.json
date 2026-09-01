@@ -1,7 +1,7 @@
 {
   "id": "ai-advice",
   "name": "AI Advice",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "minAppVersion": "1.11.4",
   "description": "Analyze the current note with DeepSeek, then copy or insert the suggestions.",
   "author": "Dory",

@@ -1,4 +1,10 @@
-import { Notice, PluginSettingTab, SecretComponent, Setting } from 'obsidian';
+import {
+  Notice,
+  PluginSettingTab,
+  SecretComponent,
+  Setting,
+  type SettingDefinitionItem,
+} from 'obsidian';
 import { AdviceError } from './deepseek-client';
 import type AiAdvicePlugin from './main';
 import type { LanguagePreference } from './types';
@@ -8,13 +14,52 @@ export class AiAdviceSettingTab extends PluginSettingTab {
     super(plugin.app, plugin);
   }
 
+  getSettingDefinitions(): SettingDefinitionItem[] {
+    const t = this.plugin.t.bind(this.plugin);
+    return [
+      {
+        name: t('settingsLanguageName'),
+        desc: t('settingsLanguageDesc'),
+        render: (setting) => this.configureLanguageSetting(setting),
+      },
+      {
+        name: t('settingsApiKeyName'),
+        desc: t('settingsApiKeyDesc'),
+        render: (setting) => this.configureApiKeySetting(setting),
+      },
+      {
+        name: t('settingsTestName'),
+        desc: t('settingsTestDesc'),
+        render: (setting) => this.configureTestSetting(setting),
+      },
+      {
+        name: t('settingsPrivacyName'),
+        desc: t('settingsPrivacy'),
+        searchable: false,
+        render: (setting) => setting.settingEl.addClass('ai-advice-settings-privacy'),
+      },
+    ];
+  }
+
   display(): void {
+    this.renderLegacySettings();
+  }
+
+  private renderLegacySettings(): void {
     const { containerEl } = this;
     const t = this.plugin.t.bind(this.plugin);
     containerEl.empty();
     containerEl.createEl('p', { text: t('settingsIntro') });
 
-    new Setting(containerEl)
+    this.configureLanguageSetting(new Setting(containerEl));
+    this.configureApiKeySetting(new Setting(containerEl));
+    this.configureTestSetting(new Setting(containerEl));
+    containerEl.createDiv({ text: t('settingsPrivacy'), cls: 'ai-advice-settings-privacy' });
+  }
+
+  private configureLanguageSetting(setting: Setting): void {
+    const t = this.plugin.t.bind(this.plugin);
+    setting
       .setName(t('settingsLanguageName'))
       .setDesc(t('settingsLanguageDesc'))
       .addDropdown((dropdown) => dropdown
@@ -26,10 +71,12 @@ export class AiAdviceSettingTab extends PluginSettingTab {
           this.plugin.settings.language = value as LanguagePreference;
           await this.plugin.saveSettings();
           this.plugin.refreshLanguage();
-          this.display();
         }));
+  }
 
-    new Setting(containerEl)
+  private configureApiKeySetting(setting: Setting): void {
+    const t = this.plugin.t.bind(this.plugin);
+    setting
       .setName(t('settingsApiKeyName'))
       .setDesc(t('settingsApiKeyDesc'))
       .addComponent((element) => new SecretComponent(this.app, element)
@@ -38,8 +85,11 @@ export class AiAdviceSettingTab extends PluginSettingTab {
           this.plugin.settings.secretName = value;
           await this.plugin.saveSettings();
         }));
+  }
 
-    new Setting(containerEl)
+  private configureTestSetting(setting: Setting): void {
+    const t = this.plugin.t.bind(this.plugin);
+    setting
       .setName(t('settingsTestName'))
       .setDesc(t('settingsTestDesc'))
       .addButton((button) => button
@@ -58,8 +108,5 @@ export class AiAdviceSettingTab extends PluginSettingTab {
             button.setDisabled(false).setButtonText(t('testConnection'));
           }
         }));
-
-    containerEl.createDiv({ text: t('settingsPrivacy'), cls: 'ai-advice-settings-privacy' });
   }
 }
-

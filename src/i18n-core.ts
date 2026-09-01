@@ -48,6 +48,7 @@ const en = {
   testingConnection: 'Testing…',
   connectionSuccess: 'DeepSeek connection succeeded.',
   connectionFailed: 'DeepSeek connection failed.',
+  settingsPrivacyName: 'Privacy',
   settingsPrivacy: 'Privacy: the plugin has no telemetry or chat history and does not use a proxy server. Selected content is sent directly to DeepSeek only after you press “Get advice”.',
   adviceHeading: 'AI suggestion',
 } as const;
@@ -100,6 +101,7 @@ const zh: Record<keyof typeof en, string> = {
   testingConnection: '测试中……',
   connectionSuccess: 'DeepSeek 连接成功。',
   connectionFailed: 'DeepSeek 连接失败。',
+  settingsPrivacyName: '隐私',
   settingsPrivacy: '隐私说明：插件不收集遥测、不保存对话，也不经过中转服务器。只有点击“获取建议”后，所选内容才会直接发送给 DeepSeek。',
   adviceHeading: 'AI 建议',
 };
@@ -126,4 +128,3 @@ export function translate(
     template,
   );
 }
-

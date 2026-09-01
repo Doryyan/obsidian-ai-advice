@@ -26,7 +26,7 @@ export default class AiAdvicePlugin extends Plugin {
     this.client = new DeepSeekClient(this.app, () => this.settings);
     this.addSettingTab(new AiAdviceSettingTab(this));
     this.addCommand({
-      id: 'open-ai-advice',
+      id: 'open',
       name: this.t('commandOpen'),
       callback: () => void this.openAdvice(),
     });
