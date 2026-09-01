@@ -1,0 +1,11 @@
+node_modules/
+artifacts/
+release/
+coverage/
+.obsidian/
+.DS_Store
+.env
+.env.*
+data.json
+*.zip
+
